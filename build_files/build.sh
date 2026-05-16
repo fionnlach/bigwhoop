@@ -12,6 +12,25 @@ set -ouex pipefail
 # this installs a package from fedora repos
 dnf5 install -y tmux 
 
+
+# setup niri
+dnf5 -y install					\
+	niri						\
+	alacritty					\
+	gdm							\
+	xdg-desktop-portal-gtk		\
+	xdg-desktop-portal-gnome	\
+	gnome-keyring				\
+	nautilus					\
+	mako						\
+	fuzzel						\
+	waybar						\
+	swayidle					\
+	swaylock					\
+	polkit-kde					\
+	xwayland-satellite			\
+	swaybg
+
 # Use a COPR Example:
 #
 # dnf5 -y copr enable ublue-os/staging
@@ -22,3 +41,6 @@ dnf5 install -y tmux
 #### Example for enabling a System Unit File
 
 systemctl enable podman.socket
+systemctl --global add-wants niri.service mako.service
+systemctl --global add-wants niri.service swayidle.service
+systemctl --global add-wants niri.service plasma-polkit-agent.service
